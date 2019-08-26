@@ -49,9 +49,6 @@ def arsnorm(A):
     return np.sum(np.abs(A) ** 2, axis=0) ** (1. / 2)
 
 
-# def arsNorm(A):
-#   return np.sqrt(np.multiply(A[:,0],A[:,0]) + np.multiply(A[:,1],A[:,1]) + np.multiply(A[:,2],A[:,2]))
-
 def arsunit(A, radius):
     normOfA = arsnorm(A.transpose())
     return radius * (np.divide(A, np.transpose(np.vstack((normOfA, normOfA, normOfA)))))
@@ -138,11 +135,9 @@ def spherical_triangle_centroid(M):
 
 
 '''
-takes a vector lam (principle stretch ratio) and outputs the three principle stretch ratios in the xyz
+this function takes a vector lam (principle stretch ratio) and outputs the three principle stretch ratios in the xyz
 directions in accordance wit the specified deformation type, t
 '''
-
-
 def deform(lam, t):
     # uniaxial deformation
     if t == 1:
@@ -165,19 +160,17 @@ def deform(lam, t):
     return np.vstack((lam3, lam2, lam1))
 
 
-# returns the inverse Langevin of x
+# function to calculate the inverse Langevin of x
 def inverse_langevin(x):
     return (x < 0.99) * x * (3 - x ** 2) / (1 - x ** 2)
 
 
 '''
-returns the entropy of each chain, the force exerted on each chain, and the total force exerted...
+this function returns the entropy of each chain, the force exerted on each chain, and the total force exerted...
 on the network. r is a matrix made up of individual chain lengths as they undergo deformation...
 omega is the solid angle of the triangle representing each chain, n0 are the chain lengths, G is...
 a the shear modulus and h is the step size used for differentiation
 '''
-
-
 def force(r, omega, n0, G, h):
     b = inverse_langevin(r / np.sqrt(n0))
     s = (r > 0) * omega * (G * np.sqrt(n0) * ((r * b) + np.log(b / np.sinh(b)))) + (r <= 0) * 0  # entropy of chains
@@ -187,16 +180,7 @@ def force(r, omega, n0, G, h):
     return s, f, F
 
 
-'''
-this function takes physical parameters and deformation behaviour and returns the loading and unloading
-stress-strain curve for the elastomer. n is the average number of links per chain, N is the chain density per 
-unit sphere, G is the shear modulus, h is the step size for numerical differentiation, tolerance is the maximum percent tolerance before
-the chain breaks, lam_max is the maximum stretch ratio, defType determines the deformation type (1 for uniaxial,
-2 for equibiaxial and 3 for pure shear), and distType determines the chain distrubution type (1 for uniform grid
-distribution and 2 for octahedron method)
-'''
-
-
+# function for plotting stress-strain relation
 def plot_relation(lam0, F, Fnew, fig):
     plt.ylim([0, np.max(F) + 0.01])
     plt.margins(0, 0)
@@ -205,7 +189,16 @@ def plot_relation(lam0, F, Fnew, fig):
     plt.xlabel('Stretch ratio (%)')
     plt.ylabel('Tensile force (N)')
     plt.title('Stress Strain Relation')
-
+    
+    
+'''
+this function takes physical parameters and deformation behaviour and returns the loading and unloading
+stress-strain curve for the elastomer. n is the average number of links per chain, N is the chain density per 
+unit sphere, G is the shear modulus, h is the step size for numerical differentiation, tolerance is the maximum percent tolerance before
+the chain breaks, lam_max is the maximum stretch ratio, defType determines the deformation type (1 for uniaxial,
+2 for equibiaxial and 3 for pure shear), and distType determines the chain distrubution type (1 for uniform grid
+distribution and 2 for octahedron method)
+'''
 
 def stress_strain_relation(n, N, G, h, std, tolerance, lam_max, defType, distType):
     np.random.seed(1)
