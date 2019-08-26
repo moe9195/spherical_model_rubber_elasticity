@@ -1,7 +1,26 @@
-# import relevant libraries
 from math import *
 import numpy as np
 import matplotlib.pyplot as plt
+
+
+'''
+This file has all the relevant functions for modelling the force exerted on an elastomer undergoing elastic deformation.
+The model used is based on a chain network where each unit is made up of N chains orientated in a spherical fashion.
+
+The parameters are:
+n = average number of links per chain
+N = chain density per unit sphere
+G = shear modulus
+h = step size for numerical differentiation
+tolerance = maximum percent tolerance before the chain breaks (0 < tolerance < 1)
+lam_max = maximum stretch ratio
+defType = deformation type (1 = uniaxial, 2 = equibiaxial, 3 = pure shear)
+distType = chain distribution type (1 = uniform grid distribution, 2 = octahedron method)
+'''
+
+__author__ = "Mohammad Rahmeh"
+__email__ = "moerahmeh95@hotmail.com"
+__date__ = "August 26, 2019"
 
 
 # triangulates a sphere using the uniform grid method. Returns matrix of triangle vertices, M
@@ -194,10 +213,10 @@ def plot_relation(lam0, F, Fnew, fig):
 '''
 this function takes physical parameters and deformation behaviour and returns the loading and unloading
 stress-strain curve for the elastomer. n is the average number of links per chain, N is the chain density per 
-unit sphere, G is the shear modulus, h is the step size for numerical differentiation, tolerance is the maximum percent tolerance before
-the chain breaks, lam_max is the maximum stretch ratio, defType determines the deformation type (1 for uniaxial,
-2 for equibiaxial and 3 for pure shear), and distType determines the chain distrubution type (1 for uniform grid
-distribution and 2 for octahedron method)
+unit sphere, G is the shear modulus, h is the step size for numerical differentiation, tolerance is the maximum percent 
+tolerance before the chain breaks, lam_max is the maximum stretch ratio, defType determines the deformation type 
+(1 for uniaxial, 2 for equibiaxial and 3 for pure shear), and distType determines the chain distrubution type
+(1 for uniform grid distribution and 2 for octahedron method)
 '''
 
 def stress_strain_relation(n, N, G, h, std, tolerance, lam_max, defType, distType):
