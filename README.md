@@ -1,1 +1,7 @@
 # spherical_model_rubber_elasticity
+
+I propose a numerical model for modelling the behaviour of elastomers under deformations. The proposed model is based on a spherically oriented network of polydisperse N chain. It contains five physically motivated parameters and two computational parameters which need to be determined on the basis of experimental data.
+
+The model is able to predict experimental results under uniaxial deformation, equibiaxial deformation and pure shear with excellent accuracy. The inclusion of a damage parameter allows for the prediction of the [Mullins effect](https://abaqus-docs.mit.edu/2017/English/SIMACAEMATRefMap/simamat-c-mullins.htm) and the innate representative directions due to the spherical orientation of the network predicts anisotropic softening in agreement with experiment.
+
+This work is based on my [masters thesis](https://drive.google.com/file/d/1Sbm8yCoAqp042DqZWpC2vrmxCLPt74Et/view?usp=sharing) which I suggest reading for a full understanding of the model. I also suggest looking at [this](https://github.com/moe9195/RubberPhysics/blob/master/elastomers_deformation_models.ipynb) and [this](https://github.com/moe9195/RubberPhysics/blob/master/elastomers_deformation_models.ipynb) first to understand the functions used in this project. For any questions unanswered by the thesis, please feel free to email me your questions at [moerahmeh95@hotmail.com](mailto:moerahmeh95@hotmail.com).
