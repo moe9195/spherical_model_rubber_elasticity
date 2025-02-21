@@ -1,7 +1,11 @@
-import RubberElasticity as rs
 import numpy as np
 import matplotlib.pyplot as plt
-from RubberElasticity import NetworkParameters, DeformationType, DistributionType, StressStrainAnalyzer
+
+from src.models.network_parameters import NetworkParameters
+from src.enums.deformation_type import DeformationType
+from src.enums.distribution_type import DistributionType
+from src.mechanics.stress_strain_analyzer import StressStrainAnalyzer
+from src.visualization.plot_manager import PlotManager
 
 np.seterr(divide='ignore', invalid='ignore')
 
@@ -33,6 +37,6 @@ for x in lam_max:
         def_type=DeformationType.UNIAXIAL,
         dist_type=DistributionType.UNIFORM_GRID
     )
-    rs.PlotManager.plot_relation(lam0, F, Fnew, fig)
+    PlotManager.plot_relation(lam0, F, Fnew, fig)
 
 plt.show()
